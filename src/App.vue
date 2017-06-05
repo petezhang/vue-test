@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <nav class="nav-container clear-both">
+    <nav class="nav-container">
+    <div class="nav-content  clear-both">
       <img src="./assets/logo.png" width="42" height="42">
       <ul class="clear-both">
-        <li><router-link to='/demo1'>demo1</router-link></li>
-        <li><router-link to='/demo2'>demo2</router-link></li>
-        <li><router-link to='/demo3'>demo3</router-link></li>
-        <li><router-link to='/demo4'>demo4</router-link></li>
+        <li><router-link to='/top'>Top</router-link></li>
+        <li><router-link to='/new'>New</router-link></li>
+        <li><router-link to='/show'>Show</router-link></li>
+        <li><router-link to='/ask'>Ask</router-link></li>
+        <li><router-link to='/jobs'>Jobs</router-link></li>
       </ul>
+    </div>
     </nav>
     <router-view class='view-container'></router-view>
   </div>
@@ -35,23 +38,28 @@ a{text-decoration: none;}
   background-color: #f4f4f4;border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
 }
-.nav-container img{
+.nav-content{
+  width: 1000px;
+  margin: 0 auto;
+}
+.nav-content img{
   float: left;
 }
-.nav-container ul{
-  float: right;
+.nav-content ul{
+  float: left;
 }
-.nav-container ul >li{
+.nav-content ul >li{
     float: left;
     list-style: none;
-    width: 120px;
+    width: 80px;
     height: 42px;
     line-height: 100%;
     text-align: center;
   }
-  .nav-container ul >li a{
+  .nav-content ul >li a{
     line-height: 42px;
     color: #333;
+    font-size: 14px;
   }
   .clear-both:after{
     content: '';

@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
-import Test from '@/components/Test'
-import demo1 from '@/components/demo1'
-import demo2 from '@/components/demo2'
-import demo3 from '@/components/demo3'
-import demo4 from '@/components/demo4'
+import Top from '@/components/top'
+import New from '@/components/new'
+import Show from '@/components/show'
+import Ask from '@/components/ask'
+import Jobs from '@/components/jobs'
 
 Vue.use(Router)
 
@@ -15,24 +15,24 @@ export default new Router({
     name: 'Hello',
     component: Hello
   }, {
-    path: '/test',
-    name: 'Test',
-    component: Test
+    path: '/top',
+    name: 'Top',
+    component: Top
   }, {
-    path: '/demo1',
-    name: 'demo1',
-    component: demo1
+    path: '/new',
+    name: 'New',
+    component: New
   }, {
-    path: '/demo2',
-    name: 'demo2',
-    component: demo2
+    path: '/show',
+    name: 'Show',
+    component: Show
   }, {
-    path: '/demo3',
-    name: 'demo3',
-    component: demo3
+    path: '/ask',
+    name: 'Ask',
+    component: Ask
   }, {
-    path: '/demo4',
-    name: 'demo4',
-    component: demo4
+    path: '/jobs',
+    name: 'Jobs',
+    component: Jobs
   }]
 })
