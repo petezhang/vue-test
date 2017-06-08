@@ -28,6 +28,9 @@ new Vue({
   el: '#app',
   router,
   store,
+  mounted () {
+    this.$store.dispatch('GET_LIST_DATA')
+  },
   template: '<App/>',
   components: { App }
 })

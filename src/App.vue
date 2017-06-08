@@ -27,6 +27,9 @@ export default {
   margin: 0;
   padding: 0;
 }
+body{
+  background-color: #fafafa;
+}
 a{text-decoration: none;}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -36,7 +39,6 @@ a{text-decoration: none;}
 }
 .nav-container{
   background-color: #f4f4f4;border-bottom: 1px solid #ccc;
-  margin-bottom: 20px;
 }
 .nav-content{
   width: 1000px;
@@ -69,6 +71,9 @@ a{text-decoration: none;}
     height: 0;
   }
   .view-container{
-    margin: 0 100px;
+    width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    min-height: 100px;
   }
 </style>
