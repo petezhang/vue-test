@@ -4,32 +4,24 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import {createStore} from './store'
+import axios from 'axios'
+
+Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
 const store = createStore()
 
-// new Vuex.Store({
-//   state: {
-//     lists: ['test1', 'test2', 'test3', 'test4']
-//   },
-//   mutations: {
-//     increment (state) {
-//       state.count = 'hello word'
-//     },
-//     addList (state, { str }) {
-//       state.lists.push(str)
-//     }
-//   }
-// })
-
 /* eslint-disable no-new */
-new Vue({
+var vm = new Vue({
   el: '#app',
   router,
   store,
   mounted () {
-    this.$store.dispatch('GET_LIST_DATA')
+    this.$http.get('/api/jobs/positionAjax.json?px=default&city=%E8%8B%8F%E5%B7%9E&needAddtionalResult=false').then(function (res) {
+      console.log(res)
+      vm.$store.dispatch('GET_LIST_DATA',res.data.content.positionResult.result)
+    })
   },
   template: '<App/>',
   components: { App }

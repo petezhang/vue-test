@@ -1,12 +1,6 @@
-import {
-  getData
-} from '../service/getdata'
-
 export default {
-  GET_LIST_DATA: ({
-    commit
-  }) => {
-    const ids = getData()
+  GET_LIST_DATA: ({ commit }, lists) => {
+    const ids = lists
     const type = 'top'
     commit('SET_LIST', {
       type,
