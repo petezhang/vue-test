@@ -5,14 +5,14 @@
     <!--数据列表-->
     <list></list>
     <!--分页-->
-    <div class="pagination">
-    </div>
+    <pagination :page-data="pageData" v-on:onPageChange="onPageChange"></pagination>
   </section>
 
 </template>
 <script>
 import list from './list.vue'
 import search from './search.vue'
+import pagination from './pagination.vue'
 export default {
   name: 'test',
   data () {
@@ -22,11 +22,29 @@ export default {
   },
   components: {
     list,
-    search
+    search,
+    pagination
   },
   computed: {
     lists: function () {
       return this.$store.state.lists.top
+    },
+    pageData: {
+      get: function () {
+        var pageSize = 5
+        var totalPages = Math.ceil(this.lists.length / pageSize)
+        var totalCounts = this.lists.length
+        return {
+          totalPages: totalPages,
+          totalCounts: totalCounts,
+          pageIndex: 1,
+          pageSize: pageSize
+        }
+      },
+      set: function (pageIdx) {
+        this.pageIndex = pageIdx
+        console.log(this.pageIndex + '--------------' + pageIdx)
+      }
     }
   },
   methods: {
@@ -35,6 +53,9 @@ export default {
     },
     toInformation: function (item) {
       this.$router.push({path: 'information', query: {'companyId': item.companyId}})
+    },
+    onPageChange: function (pageIdx) {
+      this.pageData = pageIdx
     }
   }
 }
