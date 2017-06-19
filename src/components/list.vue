@@ -1,6 +1,6 @@
 <template>
   <div class="list-container">
-    <div class="list-item" v-for="item in lists" @click="toInformation(item)">
+    <div class="list-item" v-for="item in myLists" @click="toInformation(item)">
       <div class="list-header clear">
         <div class="list-header-left">
           <h4 class="job-name">{{item.positionName}}</h4>
@@ -24,9 +24,31 @@
 <script>
 export default {
   name: 'list',
+  props: ['pageData'],
+//  data () {
+//    return {
+//     pageData: this.pageData,
+//      lists: this.$store.state.lists.top
+//    }
+//  },
   computed: {
     lists: function () {
       return this.$store.state.lists.top
+    },
+    myLists: function () {
+      var _myListsArr = []
+      if (this.pageData.searchStr) {
+        for (var i = 0; i < this.lists.length; i++) {
+          if (JSON.stringify(this.lists[i]).indexOf(this.pageData.searchStr) !== -1) {
+            _myListsArr.push(this.lists[i])
+          }
+        }
+      } else {
+        _myListsArr = this.lists
+      }
+      console.log(_myListsArr.length)
+      this.$emit('onChangePage',_myListsArr.length)
+      return _myListsArr.slice((this.pageData.pageIndex - 1) * this.pageData.pageSize, this.pageData.pageIndex * this.pageData.pageSize)
     }
   },
   methods: {

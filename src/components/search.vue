@@ -13,7 +13,7 @@
     },
     methods: {
       search: function () {
-        console.log(this.searchStr)
+        this.$emit('onSearch', this.searchStr)
       }
     }
   }

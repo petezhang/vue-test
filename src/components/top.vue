@@ -1,9 +1,9 @@
 <template>
   <section class="content">
     <!--搜索框-->
-    <search></search>
+    <search v-on:onSearch="onSearch"></search>
     <!--数据列表-->
-    <list></list>
+    <list :page-data="pageData" v-on:onChangePage="onChangePage"></list>
     <!--分页-->
     <pagination :page-data="pageData" v-on:onPageChange="onPageChange"></pagination>
   </section>
@@ -17,7 +17,14 @@ export default {
   name: 'test',
   data () {
     return {
-      list: []
+      lists: [],
+      pageData: {
+        totalPages: 1,
+        totalCounts: 1,
+        pageIndex: 1,
+        pageSize: 5,
+        searchStr: ''
+      }
     }
   },
   components: {
@@ -25,27 +32,11 @@ export default {
     search,
     pagination
   },
-  computed: {
-    lists: function () {
-      return this.$store.state.lists.top
-    },
-    pageData: {
-      get: function () {
-        var pageSize = 5
-        var totalPages = Math.ceil(this.lists.length / pageSize)
-        var totalCounts = this.lists.length
-        return {
-          totalPages: totalPages,
-          totalCounts: totalCounts,
-          pageIndex: 1,
-          pageSize: pageSize
-        }
-      },
-      set: function (pageIdx) {
-        this.pageIndex = pageIdx
-        console.log(this.pageIndex + '--------------' + pageIdx)
-      }
-    }
+  mounted: function () {
+    this.$nextTick(function () {
+      this.$data.lists = this.$store.state.lists.top
+      this.setPageData()
+    })
   },
   methods: {
     showText: function (str) {
@@ -55,7 +46,18 @@ export default {
       this.$router.push({path: 'information', query: {'companyId': item.companyId}})
     },
     onPageChange: function (pageIdx) {
-      this.pageData = pageIdx
+      this.pageData.pageIndex = pageIdx
+    },
+    onSearch: function (searchStr) {
+      this.pageData.searchStr = searchStr
+    },
+    onChangePage: function (totalCounts) {
+      this.pageData.totalPages = Math.ceil(totalCounts / this.pageData.pageSize)
+      this.pageData.totalCounts = totalCounts
+    },
+    setPageData: function () {
+      this.pageData.totalPages = Math.ceil(this.lists.length / this.pageData.pageSize)
+      this.pageData.totalCounts = this.lists.length
     }
   }
 }

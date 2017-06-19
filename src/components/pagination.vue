@@ -21,9 +21,9 @@ export default {
       if (typeof pageIndex === 'number') {
         pageIdx = pageIndex
       } else if (pageIndex === 'prove' && this.pages.pageIndex > 1) {
-        pageIdx = this.pages.pageIndex--
+        pageIdx = this.pages.pageIndex - 1
       } else if (pageIndex === 'next' && this.pages.pageIndex < this.pages.totalPages) {
-        pageIdx = this.pages.pageIndex++
+        pageIdx = this.pages.pageIndex + 1
       } else {
         return
       }
